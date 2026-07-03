@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ooble — The Immortal Pet 💜</title>
-<!-- v3.0.1 · names · presence · chat · idle acts · true evolution -->
+<!-- v3.1 · side-panel chat + wardrobe -->
 <meta name="description" content="One pet. Kept alive by the entire internet. Don't let Ooble get lonely.">
 <style>
   :root {
@@ -315,6 +315,21 @@
   @media (max-width:480px) {
     .stats { grid-template-columns:repeat(2,1fr); }
     .stage { height:330px; }
+  }
+
+  /* ------- wide screens: chat + wardrobe as side panels, no scrolling ------- */
+  @media (min-width:1240px) {
+    .chatbox {
+      position:fixed; left:18px; top:104px; width:322px; margin-top:0; z-index:20;
+      height:calc(100vh - 150px);
+      display:flex; flex-direction:column;
+    }
+    .chatlog { flex:1; height:auto; min-height:160px; }
+    .shop {
+      position:fixed; right:18px; top:104px; width:322px; margin-top:0; z-index:20;
+      max-height:calc(100vh - 150px); overflow-y:auto;
+    }
+    .hats { grid-template-columns:repeat(2,1fr); }
   }
 </style>
 </head>
