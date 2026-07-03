@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ooble — The Immortal Pet 💜</title>
-<!-- v3.2 · real Gumroad shop + unlock codes -->
+<!-- v3.3 · detailed Ooble: shading, shimmer, iris eyes, tail, toe-beans -->
 <meta name="description" content="One pet. Kept alive by the entire internet. Don't let Ooble get lonely.">
 <style>
   :root {
@@ -366,15 +366,51 @@
   <div id="petScale">
   <svg id="pet" class="breathe" width="250" height="250" viewBox="0 0 260 250" xmlns="http://www.w3.org/2000/svg" aria-label="Ooble the pet">
     <defs>
-      <radialGradient id="bodyGrad" cx="50%" cy="30%" r="80%">
-        <stop id="grad1" offset="0%" stop-color="#ffc9ea"/>
-        <stop id="grad2" offset="55%" stop-color="#e8aeff"/>
+      <radialGradient id="bodyGrad" cx="42%" cy="26%" r="88%">
+        <stop offset="0%" stop-color="#fff4fc"/>
+        <stop id="grad1" offset="16%" stop-color="#ffc9ea"/>
+        <stop id="grad2" offset="58%" stop-color="#e8aeff"/>
         <stop id="grad3" offset="100%" stop-color="#ab8ef2"/>
+      </radialGradient>
+      <radialGradient id="rimGrad" cx="50%" cy="42%" r="62%">
+        <stop offset="0%" stop-color="#5b3fa8" stop-opacity="0"/>
+        <stop offset="78%" stop-color="#5b3fa8" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#5b3fa8" stop-opacity=".38"/>
       </radialGradient>
       <radialGradient id="bellyGrad" cx="50%" cy="50%" r="60%">
         <stop offset="0%" stop-color="#fff0fa" stop-opacity=".95"/>
         <stop offset="100%" stop-color="#fff0fa" stop-opacity="0"/>
       </radialGradient>
+      <radialGradient id="cheekGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#ff8ccb" stop-opacity=".95"/>
+        <stop offset="100%" stop-color="#ff8ccb" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="irisGrad" cx="38%" cy="32%" r="80%">
+        <stop offset="0%" stop-color="#5a4088"/>
+        <stop offset="55%" stop-color="#372258"/>
+        <stop offset="100%" stop-color="#211239"/>
+      </radialGradient>
+      <linearGradient id="limbGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#dab4fb"/>
+        <stop offset="100%" stop-color="#b088ef"/>
+      </linearGradient>
+      <linearGradient id="wingGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="100%" stop-color="#dfcdff"/>
+      </linearGradient>
+      <linearGradient id="crownGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#ffe38f"/>
+        <stop offset="100%" stop-color="#f0b23c"/>
+      </linearGradient>
+      <linearGradient id="shimGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#ffffff" stop-opacity=".34"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <clipPath id="bodyClip"><path d="M130 14 C204 14 232 86 232 144 C232 202 188 234 130 234 C72 234 28 202 28 144 C28 86 56 14 130 14 Z"/></clipPath>
+      <filter id="softDrop" x="-30%" y="-30%" width="160%" height="160%">
+        <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#7a5bc0" flood-opacity=".30"/>
+      </filter>
     </defs>
 
     <!-- Lv5: sparkle aura -->
@@ -386,79 +422,115 @@
       <text x="120" y="14" font-size="13">✨</text>
     </g>
 
-    <!-- Lv4: wings -->
+    <!-- Lv4: feathered wings -->
     <g id="evo4" display="none">
-      <g class="flap"><path d="M40 120 Q4 92 12 132 Q16 156 44 152 Z" fill="#fff" opacity=".92" stroke="#dcCbf7" stroke-width="2"/></g>
-      <g class="flapR"><path d="M220 120 Q256 92 248 132 Q244 156 216 152 Z" fill="#fff" opacity=".92" stroke="#dccbf7" stroke-width="2"/></g>
+      <g class="flap"><path d="M42 118 Q2 84 8 128 Q10 144 22 150 Q10 148 14 160 Q20 172 46 156 Z" fill="url(#wingGrad)" stroke="#cbb4f2" stroke-width="2"/></g>
+      <g class="flapR"><path d="M218 118 Q258 84 252 128 Q250 144 238 150 Q250 148 246 160 Q240 172 214 156 Z" fill="url(#wingGrad)" stroke="#cbb4f2" stroke-width="2"/></g>
     </g>
 
-    <!-- nub arms -->
-    <g id="armL" transform="rotate(0 38 168)"><ellipse cx="34" cy="168" rx="15" ry="21" fill="#cda3f7"/></g>
-    <g id="armR" transform="rotate(0 222 168)"><ellipse cx="226" cy="168" rx="15" ry="21" fill="#cda3f7"/></g>
+    <g filter="url(#softDrop)">
+      <!-- nub arms -->
+      <g id="armL" transform="rotate(0 38 168)"><ellipse cx="34" cy="168" rx="15" ry="21" fill="url(#limbGrad)"/></g>
+      <g id="armR" transform="rotate(0 222 168)"><ellipse cx="226" cy="168" rx="15" ry="21" fill="url(#limbGrad)"/></g>
+      <!-- curly tail -->
+      <path d="M228 200 Q252 202 248 184 Q245 172 234 179" fill="none" stroke="url(#limbGrad)" stroke-width="9" stroke-linecap="round"/>
+      <!-- tiny feet with toe-beans -->
+      <ellipse cx="96" cy="234" rx="21" ry="11" fill="url(#limbGrad)"/>
+      <ellipse cx="164" cy="234" rx="21" ry="11" fill="url(#limbGrad)"/>
+      <path d="M88 240 L88 235 M96 242 L96 236 M104 240 L104 235" stroke="#9a76dd" stroke-width="2" stroke-linecap="round" opacity=".5"/>
+      <path d="M156 240 L156 235 M164 242 L164 236 M172 240 L172 235" stroke="#9a76dd" stroke-width="2" stroke-linecap="round" opacity=".5"/>
 
-    <!-- tiny feet -->
-    <ellipse cx="96" cy="234" rx="21" ry="11" fill="#cda3f7"/>
-    <ellipse cx="164" cy="234" rx="21" ry="11" fill="#cda3f7"/>
-
-    <!-- body: extra round -->
-    <path id="body" d="M130 14 C204 14 232 86 232 144 C232 202 188 234 130 234 C72 234 28 202 28 144 C28 86 56 14 130 14 Z" fill="url(#bodyGrad)"/>
-    <!-- belly glow -->
-    <ellipse cx="130" cy="176" rx="64" ry="46" fill="url(#bellyGrad)"/>
-    <!-- shine -->
-    <ellipse cx="86" cy="50" rx="28" ry="15" fill="#ffffff" opacity=".55" transform="rotate(-24 86 50)"/>
-    <ellipse cx="118" cy="34" rx="9" ry="5" fill="#ffffff" opacity=".5" transform="rotate(-16 118 34)"/>
-
-    <!-- Lv1: single sprout / Lv2+: ear tufts -->
-    <g id="evo1sprout"><path d="M130 16 Q126 -2 142 2 Q136 10 138 18 Z" fill="#e8aeff"/></g>
-    <g id="evo2" display="none">
-      <path d="M82 24 Q74 0 96 6 Q90 16 94 26 Z" fill="#e8aeff"/>
-      <path d="M178 24 Q186 0 164 6 Q170 16 166 26 Z" fill="#e8aeff"/>
-    </g>
-
-    <!-- Lv3: star freckles -->
-    <g id="evo3" display="none" opacity=".85">
-      <text x="98" y="196" font-size="12">⭐</text>
-      <text x="146" y="200" font-size="10">⭐</text>
-      <text x="124" y="184" font-size="9">⭐</text>
-    </g>
-
-    <!-- Lv5: built-in crown -->
-    <g id="evo5" display="none" transform="translate(130,16)">
-      <path d="M-22 2 L-22 -16 L-11 -5 L0 -20 L11 -5 L22 -16 L22 2 Z" fill="#ffd166" stroke="#c98f1b" stroke-width="2"/>
-      <circle cx="0" cy="-20" r="3.5" fill="#ff6fb7"/>
-    </g>
-
-    <!-- cheeks (tickle spots) -->
-    <ellipse id="cheekL" cx="66" cy="150" rx="17" ry="11" fill="#ff9ad5" opacity=".85" style="cursor:pointer"/>
-    <ellipse id="cheekR" cx="194" cy="150" rx="17" ry="11" fill="#ff9ad5" opacity=".85" style="cursor:pointer"/>
-
-    <!-- big sparkly eyes -->
-    <g id="eyes">
-      <ellipse cx="92" cy="110" rx="19" ry="24" fill="#fff"/>
-      <ellipse cx="168" cy="110" rx="19" ry="24" fill="#fff"/>
-      <g id="pupils">
-        <ellipse cx="94" cy="112" rx="13" ry="17" fill="#3a2452"/>
-        <ellipse cx="170" cy="112" rx="13" ry="17" fill="#3a2452"/>
-        <circle cx="99" cy="105" r="4.5" fill="#fff"/>
-        <circle cx="175" cy="105" r="4.5" fill="#fff"/>
-        <circle cx="90" cy="117" r="2.4" fill="#fff" opacity=".9"/>
-        <circle cx="166" cy="117" r="2.4" fill="#fff" opacity=".9"/>
-        <circle cx="97" cy="120" r="1.4" fill="#fff" opacity=".7"/>
-        <circle cx="173" cy="120" r="1.4" fill="#fff" opacity=".7"/>
+      <!-- body -->
+      <path id="body" d="M130 14 C204 14 232 86 232 144 C232 202 188 234 130 234 C72 234 28 202 28 144 C28 86 56 14 130 14 Z" fill="url(#bodyGrad)" stroke="#8f6fd8" stroke-opacity=".28" stroke-width="1.5"/>
+      <g clip-path="url(#bodyClip)">
+        <rect x="0" y="0" width="260" height="250" fill="url(#rimGrad)"/>
+        <ellipse cx="130" cy="176" rx="64" ry="46" fill="url(#bellyGrad)"/>
+        <!-- speckles -->
+        <circle cx="70" cy="70" r="3" fill="#fff" opacity=".22"/>
+        <circle cx="190" cy="62" r="2.4" fill="#fff" opacity=".2"/>
+        <circle cx="205" cy="120" r="2" fill="#fff" opacity=".16"/>
+        <circle cx="52" cy="120" r="2.2" fill="#fff" opacity=".16"/>
+        <circle cx="112" cy="44" r="2" fill="#fff" opacity=".25"/>
+        <circle cx="86" cy="210" r="3" fill="#6b4fc0" opacity=".10"/>
+        <circle cx="176" cy="214" r="2.6" fill="#6b4fc0" opacity=".10"/>
+        <!-- iridescent sheen -->
+        <ellipse cx="168" cy="70" rx="46" ry="22" fill="#7af0ff" opacity=".10" transform="rotate(18 168 70)"/>
+        <ellipse cx="76" cy="180" rx="40" ry="20" fill="#ff7ac3" opacity=".10" transform="rotate(-12 76 180)"/>
+        <!-- shimmer sweep -->
+        <rect x="-130" y="-10" width="90" height="270" fill="url(#shimGrad)" transform="skewX(-18)">
+          <animate attributeName="x" values="-130;300;300" keyTimes="0;.45;1" dur="7s" repeatCount="indefinite"/>
+        </rect>
       </g>
+      <!-- glass highlights -->
+      <ellipse cx="86" cy="48" rx="30" ry="16" fill="#ffffff" opacity=".6" transform="rotate(-24 86 48)"/>
+      <ellipse cx="120" cy="32" rx="10" ry="5" fill="#ffffff" opacity=".55" transform="rotate(-16 120 32)"/>
+
+      <!-- Lv1: single sprout / Lv2+: ear tufts -->
+      <g id="evo1sprout"><path d="M130 16 Q126 -2 142 2 Q136 10 138 18 Z" fill="#e8aeff" stroke="#c9a0ef" stroke-width="1"/></g>
+      <g id="evo2" display="none">
+        <path d="M82 24 Q74 0 96 6 Q90 16 94 26 Z" fill="url(#bodyGrad)" stroke="#c9a0ef" stroke-width="1"/>
+        <path d="M178 24 Q186 0 164 6 Q170 16 166 26 Z" fill="url(#bodyGrad)" stroke="#c9a0ef" stroke-width="1"/>
+      </g>
+
+      <!-- Lv3: star freckles -->
+      <g id="evo3" display="none" opacity=".9">
+        <text x="98" y="196" font-size="12">⭐</text>
+        <text x="146" y="200" font-size="10">⭐</text>
+        <text x="124" y="184" font-size="9">⭐</text>
+      </g>
+
+      <!-- Lv5: jeweled crown -->
+      <g id="evo5" display="none" transform="translate(130,16)">
+        <path d="M-22 2 L-22 -16 L-11 -5 L0 -20 L11 -5 L22 -16 L22 2 Z" fill="url(#crownGrad)" stroke="#c98f1b" stroke-width="2"/>
+        <circle cx="0" cy="-20" r="3.5" fill="#ff6fb7"/>
+        <circle cx="-16" cy="-2" r="2" fill="#3ec6d8"/>
+        <circle cx="16" cy="-2" r="2" fill="#3ec6d8"/>
+      </g>
+
+      <!-- cheeks (tickle spots) -->
+      <ellipse id="cheekL" cx="66" cy="150" rx="18" ry="12" fill="url(#cheekGrad)" style="cursor:pointer"/>
+      <ellipse id="cheekR" cx="194" cy="150" rx="18" ry="12" fill="url(#cheekGrad)" style="cursor:pointer"/>
+
+      <!-- big sparkly eyes -->
+      <g id="eyes">
+        <ellipse cx="92" cy="110" rx="19" ry="24" fill="#fff"/>
+        <ellipse cx="168" cy="110" rx="19" ry="24" fill="#fff"/>
+        <ellipse cx="92" cy="92" rx="14" ry="6" fill="#dccbf5" opacity=".55"/>
+        <ellipse cx="168" cy="92" rx="14" ry="6" fill="#dccbf5" opacity=".55"/>
+        <g id="pupils">
+          <ellipse cx="94" cy="112" rx="13" ry="17" fill="url(#irisGrad)"/>
+          <ellipse cx="170" cy="112" rx="13" ry="17" fill="url(#irisGrad)"/>
+          <ellipse cx="94" cy="120" rx="7" ry="4.5" fill="#8f7aff" opacity=".45"/>
+          <ellipse cx="170" cy="120" rx="7" ry="4.5" fill="#8f7aff" opacity=".45"/>
+          <circle cx="99" cy="105" r="4.5" fill="#fff"/>
+          <circle cx="175" cy="105" r="4.5" fill="#fff"/>
+          <circle cx="90" cy="117" r="2.4" fill="#fff" opacity=".9"/>
+          <circle cx="166" cy="117" r="2.4" fill="#fff" opacity=".9"/>
+          <circle cx="97" cy="120" r="1.4" fill="#fff" opacity=".7"/>
+          <circle cx="173" cy="120" r="1.4" fill="#fff" opacity=".7"/>
+          <path d="M88 103 l1.5 3 3 1.5 -3 1.5 -1.5 3 -1.5 -3 -3 -1.5 3 -1.5 Z" fill="#fff" opacity="0">
+            <animate attributeName="opacity" values="0;0;.95;0;0" keyTimes="0;.55;.62;.7;1" dur="5.5s" repeatCount="indefinite"/>
+          </path>
+          <path d="M164 103 l1.5 3 3 1.5 -3 1.5 -1.5 3 -1.5 -3 -3 -1.5 3 -1.5 Z" fill="#fff" opacity="0">
+            <animate attributeName="opacity" values="0;0;.95;0;0" keyTimes="0;.7;.77;.85;1" dur="6.5s" repeatCount="indefinite"/>
+          </path>
+        </g>
+      </g>
+      <!-- blink / sleep lids with lashes -->
+      <g id="lids" opacity="0">
+        <rect x="70" y="88" width="46" height="46" rx="20" fill="url(#bodyGrad)"/>
+        <rect x="146" y="88" width="46" height="46" rx="20" fill="url(#bodyGrad)"/>
+        <path d="M78 114 Q93 125 108 114" stroke="#3a2452" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M152 114 Q167 125 182 114" stroke="#3a2452" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M84 106 L79 102 M93 104 L93 99 M102 106 L107 102" stroke="#8f6fd8" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+        <path d="M158 106 L153 102 M167 104 L167 99 M176 106 L181 102" stroke="#8f6fd8" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+      </g>
+      <!-- mouth -->
+      <path id="mouth" d="M112 154 Q130 172 148 154" stroke="#3a2452" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <!-- accessory + hat layers -->
+      <g id="accLayer"></g>
+      <g id="hatLayer" transform="translate(130,26)"></g>
     </g>
-    <!-- blink / sleep lids -->
-    <g id="lids" opacity="0">
-      <rect x="70" y="88" width="46" height="46" rx="20" fill="url(#bodyGrad)"/>
-      <rect x="146" y="88" width="46" height="46" rx="20" fill="url(#bodyGrad)"/>
-      <path d="M78 114 Q93 125 108 114" stroke="#3a2452" stroke-width="4" fill="none" stroke-linecap="round"/>
-      <path d="M152 114 Q167 125 182 114" stroke="#3a2452" stroke-width="4" fill="none" stroke-linecap="round"/>
-    </g>
-    <!-- mouth -->
-    <path id="mouth" d="M112 154 Q130 172 148 154" stroke="#3a2452" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <!-- accessory + hat layers -->
-    <g id="accLayer"></g>
-    <g id="hatLayer" transform="translate(130,26)"></g>
   </svg>
   </div>
 </div>
