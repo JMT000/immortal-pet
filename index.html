@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ooble — The Immortal Pet 💜</title>
-<!-- v3.1 · side-panel chat + wardrobe -->
+<!-- v3.2 · real Gumroad shop + unlock codes -->
 <meta name="description" content="One pet. Kept alive by the entire internet. Don't let Ooble get lonely.">
 <style>
   :root {
@@ -506,6 +506,18 @@
 </footer>
 
 <div class="toast" id="toast"></div>
+
+<div class="overlay" id="unlockOverlay">
+  <div class="modal">
+    <div class="face">🎁</div>
+    <h3 id="unlockTitle">Item</h3>
+    <p>Buy it once ($2) and dress Ooble in it forever — everyone on the internet sees it. Already bought it? Enter your unlock code below.</p>
+    <a id="buyLink" href="#" target="_blank" rel="noopener"><button style="background:linear-gradient(135deg,var(--gold),var(--accent));">Buy on Gumroad · $2 🛍️</button></a>
+    <input id="codeInput" maxlength="24" placeholder="OOBLE-…code…" autocomplete="off">
+    <button id="redeemBtn">Redeem code ✨</button>
+    <p style="margin-top:10px;"><a href="#" id="unlockClose" style="color:#8b7aa3;">maybe later</a></p>
+  </div>
+</div>
 
 <div class="overlay" id="nameOverlay">
   <div class="modal">
@@ -1052,29 +1064,67 @@
   var items = [
     { id:'none-hat', slot:'hat', emoji:'🚫', name:'No hat', price:'free', svg:'' },
     { id:'party', slot:'hat', emoji:'🥳', name:'Party cone', price:'free today!', svg:'<path d="M0 -48 L-23 6 L23 6 Z" fill="#ff7ac3"/><circle cx="0" cy="-48" r="6" fill="#ffb347"/><path d="M-23 6 L23 6" stroke="#ffb347" stroke-width="4"/>' },
-    { id:'crown', slot:'hat', emoji:'👑', name:'Tiny crown', price:'$2 · Gumroad', locked:true, svg:'<path d="M-25 6 L-25 -19 L-13 -6 L0 -25 L13 -6 L25 -19 L25 6 Z" fill="#ffd166" stroke="#c98f1b" stroke-width="2"/>' },
-    { id:'wizard', slot:'hat', emoji:'🧙', name:'Wizard hat', price:'$2 · Gumroad', locked:true, svg:'<path d="M0 -62 L-27 8 L27 8 Z" fill="#5a49b8"/><circle cx="-6" cy="-25" r="3" fill="#ffd166"/><circle cx="8" cy="-10" r="3" fill="#7af0ff"/><path d="M-31 8 L31 8" stroke="#5a49b8" stroke-width="8" stroke-linecap="round"/>' },
+    { id:'crown', slot:'hat', emoji:'👑', name:'Tiny crown', price:'$2', locked:true, buy:'https://jmtwave1.gumroad.com/l/kalhcb', codeHash:-2011037331, svg:'<path d="M-25 6 L-25 -19 L-13 -6 L0 -25 L13 -6 L25 -19 L25 6 Z" fill="#ffd166" stroke="#c98f1b" stroke-width="2"/>' },
+    { id:'wizard', slot:'hat', emoji:'🧙', name:'Wizard hat', price:'$2', locked:true, buy:'https://jmtwave1.gumroad.com/l/fbwroo', codeHash:-271779179, svg:'<path d="M0 -62 L-27 8 L27 8 Z" fill="#5a49b8"/><circle cx="-6" cy="-25" r="3" fill="#ffd166"/><circle cx="8" cy="-10" r="3" fill="#7af0ff"/><path d="M-31 8 L31 8" stroke="#5a49b8" stroke-width="8" stroke-linecap="round"/>' },
     { id:'none-acc', slot:'acc', emoji:'🚫', name:'Nothing', price:'free', svg:'' },
     { id:'bow', slot:'acc', emoji:'🎀', name:'Hair bow', price:'free', svg:'<g transform="translate(180,46) rotate(18)"><path d="M0 0 L-16 -10 L-16 10 Z" fill="#ff6fb7"/><path d="M0 0 L16 -10 L16 10 Z" fill="#ff6fb7"/><circle cx="0" cy="0" r="5" fill="#ff3d9a"/></g>' },
     { id:'flower', slot:'acc', emoji:'🌼', name:'Flower', price:'free', svg:'<g transform="translate(80,44)"><circle cx="0" cy="-8" r="6" fill="#fff"/><circle cx="8" cy="-2" r="6" fill="#fff"/><circle cx="5" cy="7" r="6" fill="#fff"/><circle cx="-5" cy="7" r="6" fill="#fff"/><circle cx="-8" cy="-2" r="6" fill="#fff"/><circle cx="0" cy="0" r="5.5" fill="#ffb347"/></g>' },
-    { id:'shades', slot:'acc', emoji:'😎', name:'Cool shades', price:'$2 · Gumroad', locked:true, svg:'<g><rect x="72" y="96" width="40" height="26" rx="11" fill="#2b2140"/><rect x="148" y="96" width="40" height="26" rx="11" fill="#2b2140"/><path d="M112 107 L148 107" stroke="#2b2140" stroke-width="5"/><path d="M72 105 L58 99" stroke="#2b2140" stroke-width="5" stroke-linecap="round"/><path d="M188 105 L202 99" stroke="#2b2140" stroke-width="5" stroke-linecap="round"/></g>' }
+    { id:'shades', slot:'acc', emoji:'😎', name:'Cool shades', price:'$2', locked:true, buy:'https://jmtwave1.gumroad.com/l/omlzvt', codeHash:1966384150, svg:'<g><rect x="72" y="96" width="40" height="26" rx="11" fill="#2b2140"/><rect x="148" y="96" width="40" height="26" rx="11" fill="#2b2140"/><path d="M112 107 L148 107" stroke="#2b2140" stroke-width="5"/><path d="M72 105 L58 99" stroke="#2b2140" stroke-width="5" stroke-linecap="round"/><path d="M188 105 L202 99" stroke="#2b2140" stroke-width="5" stroke-linecap="round"/></g>' }
   ];
   var worn = { hat: store.get('hat', 'none-hat'), acc: store.get('acc', 'none-acc') };
+  var unlocked = store.get('unlocked', []);
+
+  function codeHash(s) {
+    var x = 5381;
+    for (var i = 0; i < s.length; i++) { x = ((x << 5) + x + s.charCodeAt(i)) | 0; }
+    return x;
+  }
+  function isWearable(it) { return !it.locked || unlocked.indexOf(it.id) >= 0; }
+
+  var unlockItem = null;
+  function openUnlock(it) {
+    unlockItem = it;
+    $('unlockTitle').textContent = it.emoji + ' ' + it.name;
+    $('codeInput').value = '';
+    $('buyLink').href = it.buy;
+    $('unlockOverlay').classList.add('show');
+  }
+  function tryRedeem() {
+    if (!unlockItem) return;
+    var code = $('codeInput').value.trim().toUpperCase();
+    if (code && codeHash(code) === unlockItem.codeHash) {
+      unlocked.push(unlockItem.id); store.set('unlocked', unlocked);
+      $('unlockOverlay').classList.remove('show');
+      confetti(80); chime();
+      worn[unlockItem.slot] = unlockItem.id; store.set(unlockItem.slot, unlockItem.id);
+      rebuildShop(); applyWorn();
+      say('OFFICIAL. FANCY. FOREVER. 💜', 3000);
+      setMood(mood + 10);
+    } else {
+      $('codeInput').value = '';
+      $('codeInput').placeholder = 'Hmm, not quite… 🤔';
+      boop(200, .15, 'sine');
+    }
+  }
+  $('redeemBtn').addEventListener('click', tryRedeem);
+  $('codeInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') tryRedeem(); });
+  $('unlockClose').addEventListener('click', function () { $('unlockOverlay').classList.remove('show'); });
 
   function applyWorn() {
     ['hat', 'acc'].forEach(function (slot) {
       var it = items.filter(function (i) { return i.id === worn[slot]; })[0];
-      $(slot === 'hat' ? 'hatLayer' : 'accLayer').innerHTML = (it && !it.locked) ? it.svg : '';
+      $(slot === 'hat' ? 'hatLayer' : 'accLayer').innerHTML = (it && isWearable(it)) ? it.svg : '';
     });
   }
   function buildShop() {
     items.forEach(function (it) {
       var grid = $(it.slot === 'hat' ? 'hatGrid' : 'accGrid');
       var el = document.createElement('div');
-      el.className = 'hat' + (it.id === worn[it.slot] ? ' active' : '');
-      el.innerHTML = '<div class="emoji">' + it.emoji + '</div><div class="name">' + it.name + '</div><div class="price">' + it.price + '</div>' + (it.locked ? '<div class="lock">🔒</div>' : '');
+      var wearable = isWearable(it);
+      el.className = 'hat' + (it.id === worn[it.slot] && wearable ? ' active' : '');
+      el.innerHTML = '<div class="emoji">' + it.emoji + '</div><div class="name">' + it.name + '</div><div class="price">' + (wearable ? (it.locked ? 'unlocked! ✨' : it.price) : it.price) + '</div>' + (wearable ? '' : '<div class="lock">🔒</div>');
       el.addEventListener('click', function () {
-        if (it.locked) { toast('Real accessories arrive with the Gumroad shop — coming soon! 🎀'); boop(200, .15, 'sine'); return; }
+        if (!isWearable(it)) { openUnlock(it); boop(500, .1); return; }
         worn[it.slot] = it.id; store.set(it.slot, it.id);
         applyWorn();
         grid.querySelectorAll('.hat').forEach(function (x) { x.classList.remove('active'); });
@@ -1084,6 +1134,10 @@
       grid.appendChild(el);
     });
     applyWorn();
+  }
+  function rebuildShop() {
+    $('hatGrid').innerHTML = ''; $('accGrid').innerHTML = '';
+    buildShop();
   }
 
   /* ---------- toast / share / sponsor ---------- */
@@ -1102,7 +1156,7 @@
     if (!sleeping) say('YES. Bring them ALL.');
   });
   $('sponsor').addEventListener('click', function () {
-    toast('Sponsor-a-day is coming soon — $5 to own this banner for 24h ⭐');
+    window.open('https://jmtwave1.gumroad.com/l/qovfmm', '_blank', 'noopener');
   });
 
   /* ---------- top bar ---------- */
