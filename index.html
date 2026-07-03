@@ -4,15 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ooble — The Immortal Pet 💜</title>
-<!-- v3.3 · detailed Ooble: shading, shimmer, iris eyes, tail, toe-beans -->
+<!-- v3.4 · refined kawaii: Quicksand/Baloo type, muted palette, drawn sparkles, painterly face -->
 <meta name="description" content="One pet. Kept alive by the entire internet. Don't let Ooble get lonely.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --sky1:#ffe9f3; --sky2:#e6e9ff; --sky3:#d3f4ff;
-    --text:#4a3560; --dim:#8b7aa3;
-    --card:rgba(255,255,255,.65); --card-border:rgba(255,255,255,.9);
-    --accent:#ff7ac3; --accent2:#8f7aff; --teal:#3ec6d8; --gold:#ffb347;
-    --shadow:rgba(150,110,200,.25);
+    --sky1:#fdeef6; --sky2:#eceeff; --sky3:#ddf2fa;
+    --text:#4d3a66; --dim:#94829f;
+    --card:rgba(255,255,255,.62); --card-border:rgba(255,255,255,.85);
+    --accent:#ef85c3; --accent2:#9a89ee; --teal:#56c3d6; --gold:#eebd72;
+    --shadow:rgba(140,105,190,.22);
   }
   body.night {
     --sky1:#241a52; --sky2:#181040; --sky3:#0e0930;
@@ -23,7 +26,7 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   html,body { min-height:100%; }
   body {
-    font-family:'Comic Sans MS','Chalkboard SE','Segoe UI Rounded','Segoe UI',system-ui,sans-serif;
+    font-family:'Quicksand','Segoe UI Rounded','Segoe UI',system-ui,sans-serif;
     background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,var(--sky3) 100%);
     color:var(--text);
     overflow-x:hidden;
@@ -49,15 +52,16 @@
 
   header { text-align:center; padding:24px 16px 2px; z-index:2; }
   header h1 {
-    font-size:clamp(28px,5.5vw,44px); letter-spacing:.5px;
-    background:linear-gradient(90deg,#ff6fb7,#8f7aff,#3ec6d8);
+    font-family:'Baloo 2','Quicksand',sans-serif; font-weight:800;
+    font-size:clamp(27px,5vw,40px); letter-spacing:.3px;
+    background:linear-gradient(95deg,#e879b8 10%,#9a89ee 55%,#56c3d6 100%);
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
   header p { color:var(--dim); font-size:14px; margin-top:6px; }
 
   .topbar { z-index:30; position:fixed; top:14px; right:14px; display:flex; gap:8px; }
   .iconbtn {
-    width:42px; height:42px; border-radius:50%; border:2px solid var(--card-border);
+    width:42px; height:42px; border-radius:50%; border:1.5px solid var(--card-border);
     background:var(--card); font-size:19px; cursor:pointer;
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 4px 14px var(--shadow); transition:transform .15s;
@@ -70,7 +74,7 @@
     font-size:13px; font-weight:700; color:var(--text);
     box-shadow:0 4px 14px var(--shadow);
   }
-  .sponsor { border:2px dashed var(--gold); cursor:pointer; transition:transform .15s; }
+  .sponsor { border:1.5px solid rgba(238,189,114,.7); cursor:pointer; transition:transform .15s; }
   .sponsor:hover { transform:scale(1.05) rotate(-1deg); }
   .sponsor b { color:var(--gold); }
   .presence { border:2px solid rgba(94,220,140,.6); }
@@ -178,13 +182,13 @@
   .moodwrap { z-index:2; width:min(430px,92vw); margin-top:8px; }
   .moodlabel { display:flex; justify-content:space-between; font-size:13px; color:var(--dim); margin-bottom:6px; font-weight:700; }
   .moodlabel b { color:var(--text); }
-  .moodbar { height:16px; border-radius:999px; background:rgba(255,122,195,.15); overflow:hidden; border:2px solid var(--card-border); }
+  .moodbar { height:16px; border-radius:999px; background:rgba(255,122,195,.15); overflow:hidden; border:1.5px solid var(--card-border); }
   .moodfill { height:100%; width:70%; border-radius:999px; background:linear-gradient(90deg,#ff5c8a,var(--accent),var(--gold)); transition:width .8s cubic-bezier(.22,1,.36,1); }
 
   /* ------- stats ------- */
   .stats { z-index:2; display:grid; grid-template-columns:repeat(4,1fr); gap:10px; width:min(580px,94vw); margin-top:18px; }
   .stat {
-    background:var(--card); border:2px solid var(--card-border); border-radius:20px;
+    background:var(--card); border:1.5px solid var(--card-border); border-radius:20px;
     padding:12px 6px; text-align:center; backdrop-filter:blur(8px);
     box-shadow:0 4px 14px var(--shadow); transition:transform .15s;
   }
@@ -205,12 +209,12 @@
   button.btn:hover { transform:translateY(-3px) scale(1.04) rotate(-1deg); }
   button.btn:active { transform:scale(.94); }
   button.btn.teal { background:linear-gradient(135deg,var(--teal),var(--accent2)); }
-  button.ghost { background:var(--card); color:var(--text); border:2px solid var(--card-border); box-shadow:0 4px 14px var(--shadow); }
+  button.ghost { background:var(--card); color:var(--text); border:1.5px solid var(--card-border); box-shadow:0 4px 14px var(--shadow); }
 
   /* ------- chat ------- */
   .chatbox {
     z-index:2; width:min(580px,94vw); margin-top:30px;
-    background:var(--card); border:2px solid var(--card-border);
+    background:var(--card); border:1.5px solid var(--card-border);
     border-radius:26px; padding:18px; backdrop-filter:blur(8px);
     box-shadow:0 8px 26px var(--shadow);
   }
@@ -232,7 +236,7 @@
   .chatrow { display:flex; gap:8px; margin-top:10px; }
   .chatrow input {
     flex:1; font-family:inherit; font-size:14px; font-weight:600;
-    padding:11px 16px; border-radius:999px; border:2px solid var(--card-border);
+    padding:11px 16px; border-radius:999px; border:1.5px solid var(--card-border);
     background:rgba(255,255,255,.6); color:var(--text); outline:none;
   }
   body.night .chatrow input { background:rgba(255,255,255,.08); }
@@ -248,7 +252,7 @@
   /* ------- wardrobe ------- */
   .shop {
     z-index:2; width:min(580px,94vw); margin-top:26px;
-    background:var(--card); border:2px solid var(--card-border);
+    background:var(--card); border:1.5px solid var(--card-border);
     border-radius:26px; padding:22px; backdrop-filter:blur(8px);
     box-shadow:0 8px 26px var(--shadow);
   }
@@ -257,7 +261,7 @@
   .slotlbl { font-size:11px; font-weight:800; color:var(--dim); text-transform:uppercase; letter-spacing:1px; margin:16px 0 8px; }
   .hats { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
   .hat {
-    background:rgba(255,255,255,.4); border:2px solid var(--card-border);
+    background:rgba(255,255,255,.4); border:1.5px solid var(--card-border);
     border-radius:16px; padding:12px 4px; text-align:center; cursor:pointer;
     transition:transform .15s, border-color .15s; position:relative;
   }
@@ -411,15 +415,22 @@
       <filter id="softDrop" x="-30%" y="-30%" width="160%" height="160%">
         <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#7a5bc0" flood-opacity=".30"/>
       </filter>
+      <filter id="softBlur" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.4"/></filter>
+      <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <radialGradient id="starGold" cx="50%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#fff3cf"/>
+        <stop offset="100%" stop-color="#f2c064"/>
+      </radialGradient>
+      <path id="sparkle4" d="M0 -7 Q1.6 -1.6 7 0 Q1.6 1.6 0 7 Q-1.6 1.6 -7 0 Q-1.6 -1.6 0 -7 Z"/>
     </defs>
 
     <!-- Lv5: sparkle aura -->
-    <g id="evo5aura" class="aura" opacity="0" display="none">
-      <text x="26" y="60" font-size="16">✨</text>
-      <text x="216" y="52" font-size="14">✨</text>
-      <text x="18" y="150" font-size="13">✨</text>
-      <text x="228" y="160" font-size="16">✨</text>
-      <text x="120" y="14" font-size="13">✨</text>
+    <g id="evo5aura" class="aura" opacity="0" display="none" filter="url(#glow)">
+      <use href="#sparkle4" x="0" y="0" transform="translate(30,56) scale(1.1)" fill="url(#starGold)"/>
+      <use href="#sparkle4" x="0" y="0" transform="translate(222,48) scale(.9)" fill="#f7c9e6"/>
+      <use href="#sparkle4" x="0" y="0" transform="translate(22,148) scale(.7)" fill="#bfeef7"/>
+      <use href="#sparkle4" x="0" y="0" transform="translate(236,156) scale(1)" fill="url(#starGold)"/>
+      <use href="#sparkle4" x="0" y="0" transform="translate(126,10) scale(.75)" fill="#f7c9e6"/>
     </g>
 
     <!-- Lv4: feathered wings -->
@@ -456,14 +467,19 @@
         <!-- iridescent sheen -->
         <ellipse cx="168" cy="70" rx="46" ry="22" fill="#7af0ff" opacity=".10" transform="rotate(18 168 70)"/>
         <ellipse cx="76" cy="180" rx="40" ry="20" fill="#ff7ac3" opacity=".10" transform="rotate(-12 76 180)"/>
+        <!-- soft contact shading -->
+        <ellipse cx="130" cy="198" rx="36" ry="13" fill="#8f6fd8" opacity=".07" filter="url(#softBlur)"/>
+        <ellipse cx="52" cy="170" rx="14" ry="26" fill="#7a5bc0" opacity=".08" filter="url(#softBlur)"/>
+        <ellipse cx="208" cy="170" rx="14" ry="26" fill="#7a5bc0" opacity=".08" filter="url(#softBlur)"/>
         <!-- shimmer sweep -->
         <rect x="-130" y="-10" width="90" height="270" fill="url(#shimGrad)" transform="skewX(-18)">
           <animate attributeName="x" values="-130;300;300" keyTimes="0;.45;1" dur="7s" repeatCount="indefinite"/>
         </rect>
       </g>
-      <!-- glass highlights -->
-      <ellipse cx="86" cy="48" rx="30" ry="16" fill="#ffffff" opacity=".6" transform="rotate(-24 86 48)"/>
-      <ellipse cx="120" cy="32" rx="10" ry="5" fill="#ffffff" opacity=".55" transform="rotate(-16 120 32)"/>
+      <!-- glass highlights (soft) -->
+      <ellipse cx="86" cy="48" rx="30" ry="16" fill="#ffffff" opacity=".55" transform="rotate(-24 86 48)" filter="url(#softBlur)"/>
+      <ellipse cx="120" cy="32" rx="10" ry="5" fill="#ffffff" opacity=".5" transform="rotate(-16 120 32)" filter="url(#softBlur)"/>
+      <ellipse cx="182" cy="58" rx="9" ry="4" fill="#ffffff" opacity=".28" transform="rotate(28 182 58)" filter="url(#softBlur)"/>
 
       <!-- Lv1: single sprout / Lv2+: ear tufts -->
       <g id="evo1sprout"><path d="M130 16 Q126 -2 142 2 Q136 10 138 18 Z" fill="#e8aeff" stroke="#c9a0ef" stroke-width="1"/></g>
@@ -473,10 +489,10 @@
       </g>
 
       <!-- Lv3: star freckles -->
-      <g id="evo3" display="none" opacity=".9">
-        <text x="98" y="196" font-size="12">⭐</text>
-        <text x="146" y="200" font-size="10">⭐</text>
-        <text x="124" y="184" font-size="9">⭐</text>
+      <g id="evo3" display="none" opacity=".95" filter="url(#glow)">
+        <use href="#sparkle4" transform="translate(104,192) scale(.8)" fill="url(#starGold)"/>
+        <use href="#sparkle4" transform="translate(152,197) scale(.62)" fill="url(#starGold)"/>
+        <use href="#sparkle4" transform="translate(129,181) scale(.5)" fill="#fff" opacity=".9"/>
       </g>
 
       <!-- Lv5: jeweled crown -->
@@ -491,12 +507,17 @@
       <ellipse id="cheekL" cx="66" cy="150" rx="18" ry="12" fill="url(#cheekGrad)" style="cursor:pointer"/>
       <ellipse id="cheekR" cx="194" cy="150" rx="18" ry="12" fill="url(#cheekGrad)" style="cursor:pointer"/>
 
+      <!-- tiny expressive brows -->
+      <path d="M80 76 Q92 71 104 76" stroke="#6b579e" stroke-width="3" fill="none" stroke-linecap="round" opacity=".3"/>
+      <path d="M156 76 Q168 71 180 76" stroke="#6b579e" stroke-width="3" fill="none" stroke-linecap="round" opacity=".3"/>
       <!-- big sparkly eyes -->
       <g id="eyes">
         <ellipse cx="92" cy="110" rx="19" ry="24" fill="#fff"/>
         <ellipse cx="168" cy="110" rx="19" ry="24" fill="#fff"/>
         <ellipse cx="92" cy="92" rx="14" ry="6" fill="#dccbf5" opacity=".55"/>
         <ellipse cx="168" cy="92" rx="14" ry="6" fill="#dccbf5" opacity=".55"/>
+        <path d="M74 100 Q92 88 110 100" stroke="#cbb8ea" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/>
+        <path d="M150 100 Q168 88 186 100" stroke="#cbb8ea" stroke-width="2.5" fill="none" stroke-linecap="round" opacity=".55"/>
         <g id="pupils">
           <ellipse cx="94" cy="112" rx="13" ry="17" fill="url(#irisGrad)"/>
           <ellipse cx="170" cy="112" rx="13" ry="17" fill="url(#irisGrad)"/>
@@ -526,7 +547,7 @@
         <path d="M158 106 L153 102 M167 104 L167 99 M176 106 L181 102" stroke="#8f6fd8" stroke-width="2" stroke-linecap="round" opacity=".45"/>
       </g>
       <!-- mouth -->
-      <path id="mouth" d="M112 154 Q130 172 148 154" stroke="#3a2452" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path id="mouth" d="M112 154 Q130 172 148 154" stroke="#3a2452" stroke-width="4.5" fill="none" stroke-linecap="round"/>
       <!-- accessory + hat layers -->
       <g id="accLayer"></g>
       <g id="hatLayer" transform="translate(130,26)"></g>
