@@ -393,7 +393,7 @@
 </div>
 
 <footer>
-  Ooble was born on <b id="birthDate"></b> and can never die — but it <i>can</i> get lonely.<br>
+  Ooble was born on <b id="birthDate"></b> and has been visited <b id="allTimeN">…</b> times since. It can never die — but it <i>can</i> get lonely.<br>
   It sleeps when it's late where you are. Come back tomorrow to keep your streak. Ooble remembers. 💜
 </footer>
 
@@ -426,7 +426,8 @@
   var myFeeds = store.get('feeds', 0);
   var soundOn = store.get('sound', true);
   var mood = 62;
-  var visitsToday = 137 + Math.floor(Math.random() * 40);
+  var visitsToday = 0;
+  var allTime = 0;
   var sleeping = false;
   var nightOverride = null; // null = auto
 
@@ -720,19 +721,49 @@
     say('A GIFT!! It’s ' + rewards[Math.floor(Math.random() * rewards.length)] + '!!', 3600);
   });
 
-  /* ---------- simulated global visitors ---------- */
-  var cities = ['Tokyo 🇯🇵','Berlin 🇩🇪','São Paulo 🇧🇷','Copenhagen 🇩🇰','Seoul 🇰🇷','Toronto 🇨🇦','Nairobi 🇰🇪','Sydney 🇦🇺','Austin 🇺🇸','Mumbai 🇮🇳','Paris 🇫🇷','Reykjavík 🇮🇸'];
-  function fakeVisit() {
-    visitsToday++;
-    if (!sleeping) setMood(mood + 1.2); else render();
+  /* ---------- real global visitors (Abacus counter API) ---------- */
+  var API = 'https://abacus.jasoncameron.dev';
+  var NS = 'ooble-immortal-pet';
+  var dayKey = 'day-' + new Date().toISOString().slice(0, 10);
+
+  function showPing(text) {
     var ping = document.createElement('div');
     ping.className = 'visit-ping';
-    ping.textContent = '+1 visit from ' + cities[Math.floor(Math.random() * cities.length)];
+    ping.textContent = text;
     ping.style.left = (12 + Math.random() * 55) + '%';
     ping.style.top = (25 + Math.random() * 40) + '%';
     document.body.appendChild(ping);
     setTimeout(function () { ping.remove(); }, 3000);
-    setTimeout(fakeVisit, 4000 + Math.random() * 9000);
+  }
+  function renderAllTime() {
+    var el = $('allTimeN');
+    if (el) el.textContent = allTime > 0 ? allTime.toLocaleString() : '…';
+  }
+  function countInit() {
+    fetch(API + '/hit/' + NS + '/total')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { allTime = d.value; renderAllTime(); })
+      .catch(function () {});
+    fetch(API + '/hit/' + NS + '/' + dayKey)
+      .then(function (r) { return r.json(); })
+      .then(function (d) { visitsToday = d.value; render(); })
+      .catch(function () { visitsToday = 1; render(); });
+  }
+  function pollVisits() {
+    fetch(API + '/get/' + NS + '/' + dayKey)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var diff = d.value - visitsToday;
+        if (diff > 0) {
+          visitsToday = d.value;
+          allTime += diff;
+          renderAllTime();
+          if (!sleeping) setMood(mood + diff * 1.2); else render();
+          showPing('+' + diff + ' new visitor' + (diff > 1 ? 's' : '') + ' 🌍');
+        }
+      })
+      .catch(function () {})
+      .then(function () { setTimeout(pollVisits, 15000 + Math.random() * 5000); });
   }
 
   /* ---------- decay + idle chatter ---------- */
@@ -837,7 +868,8 @@
     if (sleeping) return;
     say(streak > 1 ? 'You’re back!! Day ' + streak + '! I never doubted you.' : 'Oh!! A new friend!! Pet me??', 3200);
   }, 900);
-  setTimeout(fakeVisit, 2500);
+  countInit();
+  setTimeout(pollVisits, 12000);
   setInterval(applyNight, 60000);
 })();
 </script>
